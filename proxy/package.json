@@ -1,0 +1,10 @@
+{
+  "name": "deepseek-harness-proxy",
+  "version": "1.0.0",
+  "private": true,
+  "description": "DSH HTTP+WebSocket reverse proxy with Basic Auth, Origin alignment, and crypto.randomUUID polyfill for ZimaOS",
+  "main": "index.js",
+  "dependencies": {
+    "http-proxy": "^1.18.1"
+  }
+}

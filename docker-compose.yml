@@ -1,0 +1,112 @@
+name: dsh-harness
+
+networks:
+  default:
+    name: dsh-harness_default
+    ipam: {}
+    external: false
+
+services:
+  dsh:
+    command: null
+    container_name: dsh-harness
+    build:
+      context: .
+      dockerfile: Dockerfile
+    deploy:
+      resources:
+        limits:
+          memory: 4GB
+          cpus: "2.00"
+        reservations:
+          memory: 512MB
+          cpus: "0.25"
+      placement: {}
+    entrypoint: null
+    environment:
+      # Model & API keys
+      OPENAI_API_KEY: ollama-local-dummy
+      # DEEPSEEK_API_KEY: your_deepseek_api_key_here
+      # Optional: Basic Auth for Proxy
+      # PROXY_USERNAME: admin
+      # PROXY_PASSWORD: secretpassword
+      # Workspace directory
+      DSH_WORKSPACE: /workspace/Documents
+    image: ghcr.io/src-one/deepseek-harness:latest
+    labels:
+      icon: https://cdn.jsdelivr.net/gh/selfhst/icons@main/png/deepseek.png
+    networks:
+      - default
+    ports:
+      - mode: ingress
+        target: 3080
+        published: "3080"
+        protocol: tcp
+    restart: unless-stopped
+    volumes:
+      - type: bind
+        source: /DATA/AppData/dsh-harness
+        target: /root/.dsh
+      - type: bind
+        source: /DATA/Documents
+        target: /workspace/Documents
+      - type: bind
+        source: /DATA/Downloads
+        target: /workspace/Downloads
+      - type: bind
+        source: /DATA/Media
+        target: /workspace/Media
+      - type: bind
+        source: /DATA/Gallery
+        target: /workspace/Gallery
+      - type: bind
+        source: /media/ZimaOS-HD
+        target: /zimaos
+
+x-casaos:
+  architectures:
+    - amd64
+    - arm64
+  author: src-one
+  category: AI
+  description:
+    en_US: DeepSeek Harness (dsh) agent harness with Selectable Model Modes and keyless Google Web Search via Playwright.
+    de_DE: DeepSeek Harness (dsh) KI-Agenten-Framework mit wählbaren Modell-Modi und schlüsselloser Google-Websuche via Playwright.
+  developer: src-one / DeepSeek
+  docs: https://github.com/src-one/deepseek-harness-docker
+  hostname: ""
+  icon: https://cdn.jsdelivr.net/gh/selfhst/icons@main/png/deepseek.png
+  id: org.icewhale.dsh-harness
+  index: /
+  is_uncontrolled: false
+  main: dsh
+  port_map: "3080"
+  release_notes: "DeepSeek Harness with Selectable Model Modes & Playwright Google Search Integration"
+  repo: https://github.com/src-one/deepseek-harness-docker
+  scheme: http
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/DeepSeekHarness/screenshot-1.png
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/DeepSeekHarness/screenshot-2.png
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/DeepSeekHarness/screenshot-3.png
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/DeepSeekHarness/screenshot-4.png
+  store_app_id: dsh-harness
+  support: https://github.com/src-one/deepseek-harness-docker/issues
+  tagline:
+    en_US: DeepSeek Harness with Playwright Google Web Search & Model Presets
+    de_DE: DeepSeek Harness mit Playwright Google-Websuche & Modell-Presets
+  thumbnail: https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/DeepSeekHarness/thumbnail.png
+  tips:
+    before_install:
+      en_US: |
+        - Set your OPENAI_API_KEY or DEEPSEEK_API_KEY if needed.
+        - Web search is powered keyless by local Playwright Chromium.
+      de_DE: |
+        - Setze deinen OPENAI_API_KEY oder DEEPSEEK_API_KEY falls benötigt.
+        - Die Websuche funktioniert schlüssellos direkt über lokales Playwright Chromium.
+  title:
+    custom: DeepSeekHarness
+    en_US: DeepSeekHarness
+    de_DE: DeepSeekHarness
+  update_at: 2026-09-01T00:00:00Z
+  version: 0.1.2-alpha.2
+  website: https://github.com/src-one/deepseek-harness-docker

@@ -1,0 +1,9 @@
+# Out-of-tree bundle layer for DeepSeek Harness.
+# Applied after @deepseek-ai/dsh-base. Patches replace a row's whole config.
+- id: web
+  config:
+    searchProvider: playwright-google
+    fetchProvider: http
+- insert:
+    - id: web-search-playwright
+      name: dsh-web-search-playwright
