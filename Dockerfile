@@ -39,7 +39,7 @@ RUN pnpm install \
     && mkdir -p /opt/plugins/dsh-web-search-playwright \
     && cp -r /plugin-src/* /opt/plugins/dsh-web-search-playwright/ \
     && rm -rf /opt/plugins/dsh-web-search-playwright/node_modules \
-    && cd /opt/plugins/dsh-web-search-playwright && pnpm install --prod
+    && cd /opt/plugins/dsh-web-search-playwright && pnpm install --prod --ignore-scripts
 
 # ── Stage 2: Production Runtime ─────────────────────────────────────────────
 FROM node:24-bookworm-slim
