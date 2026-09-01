@@ -90,7 +90,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libdrm2 \
     libdbus-1-3 \
     libxkbcommon0 \
-    libatspi0 \
     libx11-6 \
     libxcomposite1 \
     libxdamage1 \
